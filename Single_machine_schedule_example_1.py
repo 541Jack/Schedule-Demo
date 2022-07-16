@@ -31,4 +31,4 @@ s = 5 #Setup time of the machine
 I = range(len(p)) #Set of jobs
 J = range(len(I)) #Set of positions
 
-m, c, x = model(I,J,p,s) #Model and solve the problem
+m, c, x = model(I,J,p,s) #Model and solve the proble
