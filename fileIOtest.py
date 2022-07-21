@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import pulp as op
 import itertools as it
 
+# Adopted from: https://www.supplychaindataanalytics.com/single-machine-scheduling-with-pulp-in-python/
 # Developer: @KeivanTafakkori, 8 March 2022
+# Program minimize the total weighted completion time
 
 
 def model(I, J, p, s, dispmodel="y", solve="y", dispresult="y"):
@@ -35,36 +37,30 @@ def model(I, J, p, s, dispmodel="y", solve="y", dispresult="y"):
 
 # Read n txt file
 
+# define empty arrays
 count = 0
 p = []
 w = []
 
 
-# Using for loop
+# Reading the file in
 with open('input.txt', 'r') as file1:
     for line in file1:
         temp = []
         temp = line.split("#")
-        p += temp[0]
-        values = float(temp[1].split()[0])
-        #f_val = float(temp[1])
-        # print(f_val)
-        #w += f_val
-        w.append(values)
-        print(values)
+        p.append(int(temp[0]))  # append float
+        w.append(float(temp[1].split()[0]))
         count += 1
         print("Line{}: {}".format(count, line.strip()))
 
 print(p)
 print(w)
-"""
-w = [0.2, 0.2, 0.2, 0.2, 0.2]  # Priority weight of each job
-p = [7,   3,    9,    4,  6]  # Processing time of each job
+
 s = 0  # Setup time of the machine
 I = range(len(p))  # Set of jobs
 J = range(len(I))  # Set of positions
 
-m, c, x = model(I, J, p, s)  # Model and solve the proble
+m, c, x = model(I, J, p, s)  # Model and solve the problem
 
 seq = []
 for j in J:
@@ -108,4 +104,3 @@ for i in I:
 gnt.annotate(["TWCT", sum(w[j]*c[j].varValue for j in J)],
              ((c[len(J)-1].varValue-s)/2, 10))
 plt.savefig("io_test.png")
-"""
